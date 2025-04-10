@@ -4,6 +4,6 @@ class FriendlyParser
   end
 
   def parse
-    p @raw_html
+    @raw_html
   end
 end

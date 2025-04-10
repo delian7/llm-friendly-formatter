@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 
 gem "dotenv"
+gem "nokogiri"
 gem "rubocop-rails-omakase", require: false
 
 group :development do
