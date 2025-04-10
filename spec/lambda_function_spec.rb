@@ -7,7 +7,7 @@ RSpec.describe 'LambdaFunctionSpec' do
   describe 'when invoked with a valid event' do
     subject(:response) { lambda_handler(event: event, context: context) }
 
-    let(:event) { { 'message' => 'Hello, world!', 'httpMethod' => 'GET' } }
+    let(:event) { { 'message' => 'Hello, world!', 'httpMethod' => 'POST' } }
 
 
     it 'returns a status code of 200' do

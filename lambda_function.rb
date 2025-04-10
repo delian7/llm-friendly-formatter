@@ -8,7 +8,7 @@ def lambda_handler(event:, context:) # rubocop:disable Lint/UnusedMethodArgument
   # raw_data = event.dig('queryStringParameters', 'raw_data')
 
   case http_method
-  when 'GET'
+  when 'POST'
     send_response("hello from lambda!")
   else
     method_not_allowed_response
