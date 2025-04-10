@@ -37,6 +37,12 @@ RSpec.describe 'LambdaFunctionSpec' do
       expect(response).to include('body')
       expect { JSON.parse(response['body']) }.not_to raise_error
     end
+
+    it 'returns a body containing the parsed data' do
+      body = JSON.parse(response['body'])
+      expect(body).to include('parsed_data')
+      expect(body['parsed_data']).to eq('parsed_value')
+    end
   end
 
   context 'when missing required parameters' do

@@ -15,8 +15,7 @@ def lambda_handler(event:, context:) # rubocop:disable Lint/UnusedMethodArgument
     body = JSON.parse(event['body'])
     raise StandardError, "missing raw_html input" if body['raw_html'].nil?
 
-    FriendlyParser.new(body['raw_html']).parse
-    send_response("hello from lambda!")
+    send_response(FriendlyParser.new(body['raw_html']).parse)
   else
     method_not_allowed_response
   end
