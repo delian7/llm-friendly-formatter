@@ -5,10 +5,12 @@ RSpec.describe 'LambdaFunctionSpec' do
   subject(:response) { lambda_handler(event: event, context: context) }
 
   let(:context) { {} }
+  let(:parser_instance) { instance_double(FriendlyParser) }
 
   context 'when invoked with a valid event' do
     before do
-      allow(FriendlyParser).to receive(:parse).and_return({ 'parsed_data' => 'parsed_value' })
+      allow(FriendlyParser).to receive(:new).with(html).and_return(parser_instance)
+      allow(parser_instance).to receive(:parse).and_return({ 'parsed_data' => 'parsed_value' })
     end
 
     let(:html) { '<html><body><h1>Hello, World!</h1></body></html>' }
@@ -28,7 +30,7 @@ RSpec.describe 'LambdaFunctionSpec' do
 
     it 'calls the FriendlyParser' do
       response
-      expect(FriendlyParser).to have_received(:parse).with(html)
+      expect(parser_instance).to have_received(:parse)
     end
 
     it 'returns a body that is valid JSON' do
