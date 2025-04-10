@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require_relative 'friendly_parser'
 
 def lambda_handler(event:, context:) # rubocop:disable Lint/UnusedMethodArgument
   http_method = event['httpMethod']
@@ -9,6 +10,12 @@ def lambda_handler(event:, context:) # rubocop:disable Lint/UnusedMethodArgument
 
   case http_method
   when 'POST'
+    raise StandardError, "missing request body" unless event['body']
+
+    body = JSON.parse(event['body'])
+    raise StandardError, "missing raw_html input" if body['raw_html'].nil?
+
+    FriendlyParser.parse(body['raw_html'])
     send_response("hello from lambda!")
   else
     method_not_allowed_response
@@ -33,7 +40,7 @@ end
 
 def error_response(error)
   {
-    'statusCode' => 500,
+    'statusCode' => 405,
     'body' => JSON.generate({ error: error.message })
   }
 end
