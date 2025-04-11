@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'optparse'
 
-class HTML2KeyValue
+class HtmlParser
   def self.html_table_to_keyvalue(html_content)
     doc = Nokogiri::HTML(html_content)
     tables = doc.css('table')
@@ -49,8 +49,7 @@ class HTML2KeyValue
   end
 end
 
-
-# Parse command line options
+# Uncomment the following lines to enable command-line usage
 # options = {
 #   output: nil
 # }

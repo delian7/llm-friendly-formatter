@@ -1,4 +1,4 @@
-require_relative 'html2keyvalue'
+require_relative 'html_parser'
 
 class FriendlyParser
   def initialize(raw_html)
@@ -6,6 +6,6 @@ class FriendlyParser
   end
 
   def parse
-    HTML2KeyValue.html_table_to_keyvalue(@raw_html)
+    HtmlParser.html_table_to_keyvalue(@raw_html)
   end
 end
